@@ -24,6 +24,16 @@ mongoose.connect(keys.mongoURI);
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
 
+if (process.env.NODE_ENV === "production") {
+  //serve production assets main.js or main.css
+  app.use(express.static("client/build"));
+  //serve index.html if route doesn't match
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
 //Check environment variables to see the port number which is dynamically configured by Heroku in env variables
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
