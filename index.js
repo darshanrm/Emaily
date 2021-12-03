@@ -1,13 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 require("./models/User");
+require("./models/Survey");
 require("./sevices/passport");
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
   cookieSession({
@@ -23,6 +26,7 @@ mongoose.connect(keys.mongoURI);
 
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   //serve production assets main.js or main.css
