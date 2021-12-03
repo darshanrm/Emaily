@@ -1,0 +1,73 @@
+Heroku App Address: https://ancient-dusk-36098.herokuapp.com/
+
+create git local repo
+To deploy on Heroku
+-install heroku cli
+-heroku login
+-heroku create (to create project)
+-git push heroku origin(push git repo to heroku repo)
+
+Run heroku app
+-heroku open
+
+Oauth Registration
+-go to gcp console
+-create a new project
+-Go to APIs and Services in menu
+-Go to oauth consent screen
+-select external
+-fill required details
+-go to credetials
+-crate credentials
+-select oauth client id
+-select app type as web application
+-Authorized javascript origin to backend server address i.e http://localhost:5000
+-Authorized redirect URI to http://localhost:5000/auth/google/callback
+-copy id and secret
+
+Production environment Oauth Registration
+-Repeat the same procedure
+-Authorized javascript origin and Authorized redirect URI should be your application deployment address
+
+MongoDB Development Database
+-Login
+-Create database
+-Select AWS
+-Select Free tier
+-Scroll down and name your app
+-Click create cluster
+-Connect
+-Add your current IP address (To authorize user to manipulate db)
+-Create db user
+-Choose a connection method
+-Connect your application
+-Copy connection string and replace password with user password created few steps back
+
+MongoDB Production Database
+-Click new project and fill details
+-Create Database
+-Select AWS and free tier
+-Connect
+-Add different IP
+-Enter 0.0.0.0/0 to allow all the addresses
+-Create new database user
+-Chhose connection method
+-Connect your application
+-Copy connetion string and eplace password with the user password you created few steps back.
+
+Heroku Production Environment variables
+-Login
+-Select project and go to settings
+-Reveal environment variables
+-add all the environment variables needed to make connection with mongodb database and google auth
+
+Proxy at client side(setupProxy.js)
+-Added proxy to redirect browser to server address as server and client both are running on different servers and redirecting to server address will throw cors error as well as browser won't send cookie to server because of it's security configurations.
+
+SendGrid-
+-Open a sendgrid account
+-Go to mail settings and create API key
+-Inside mail settings go to webhook notifications and enable it to receive click notifications
+
+Ngrok(expose local server on public internet)-
+-npx ngrok http {PORT}
